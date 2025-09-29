@@ -43,6 +43,11 @@ class Settings:
         self.OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4")
         self.OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "1000"))
         
+        # Ollama (IA local gratuita)
+        self.USE_OLLAMA = os.getenv("USE_OLLAMA", "auto").lower()  # auto, true, false
+        self.OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
+        self.OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.8"))
+        
         self.ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
         self.ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "EXAVITQu4vr4xnSDxMaL")
         

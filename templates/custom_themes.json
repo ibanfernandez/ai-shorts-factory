@@ -1,0 +1,77 @@
+{
+  "custom_themes": {
+    "ejemplo_salud": {
+      "es": {
+        "channel_name": "Salud Viral",
+        "description": "Consejos de salud, datos médicos sorprendentes y bienestar",
+        "tags_base": ["salud", "medicina", "bienestar", "consejos", "viral"],
+        "content_types": ["TOP_5", "CONSEJOS", "MITOS_SALUD"],
+        "topics_pool": [
+          "alimentos más saludables del mundo",
+          "ejercicios que transforman tu cuerpo",
+          "mitos de salud que debes conocer",
+          "hábitos que alargan la vida",
+          "superalimentos que son tendencia"
+        ]
+      },
+      "en": {
+        "channel_name": "Health Viral", 
+        "description": "Health tips, surprising medical facts and wellness",
+        "tags_base": ["health", "medicine", "wellness", "tips", "viral"],
+        "content_types": ["TOP_5", "TIPS", "HEALTH_MYTHS"],
+        "topics_pool": [
+          "healthiest foods in the world",
+          "exercises that transform your body", 
+          "health myths you should know",
+          "habits that extend life",
+          "trending superfoods"
+        ]
+      }
+    },
+    "ejemplo_gaming": {
+      "es": {
+        "channel_name": "Gaming Viral",
+        "description": "Lo último en videojuegos, curiosidades gaming y trucos",
+        "tags_base": ["gaming", "videojuegos", "trucos", "curiosidades", "viral"],
+        "content_types": ["TOP_5", "TRUCOS", "CURIOSIDADES_GAMING"],
+        "topics_pool": [
+          "juegos más adictivos del momento",
+          "trucos secretos que pocos conocen",
+          "curiosidades de tus juegos favoritos",
+          "records gaming más impresionantes",
+          "easter eggs más locos de los videojuegos"
+        ]
+      },
+      "en": {
+        "channel_name": "Gaming Viral",
+        "description": "Latest in gaming, gaming curiosities and tricks", 
+        "tags_base": ["gaming", "videogames", "tricks", "curiosities", "viral"],
+        "content_types": ["TOP_5", "TRICKS", "GAMING_FACTS"],
+        "topics_pool": [
+          "most addictive games right now",
+          "secret tricks few people know",
+          "curiosities about your favorite games",
+          "most impressive gaming records",
+          "craziest easter eggs in video games"
+        ]
+      }
+    }
+  },
+  "_template": {
+    "nombre_tema": {
+      "idioma": {
+        "channel_name": "Nombre del Canal",
+        "description": "Descripción breve del tema",
+        "tags_base": ["tag1", "tag2", "tag3", "tag4", "viral"],
+        "content_types": ["TOP_5", "TIPO_CUSTOM1", "TIPO_CUSTOM2"],
+        "topics_pool": [
+          "tema ejemplo 1",
+          "tema ejemplo 2", 
+          "tema ejemplo 3",
+          "tema ejemplo 4",
+          "tema ejemplo 5"
+        ]
+      }
+    }
+  }
+}

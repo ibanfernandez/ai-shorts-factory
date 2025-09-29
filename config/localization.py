@@ -431,6 +431,36 @@ LOCALIZED_TEXTS = {
     }
 }
 
+# ===== CARGA DE TEMAS PERSONALIZADOS =====
+
+def load_custom_themes():
+    """Carga temas personalizados desde templates/custom_themes.json."""
+    import json
+    import os
+    from pathlib import Path
+    
+    try:
+        project_root = Path(__file__).parent.parent
+        custom_themes_file = project_root / "templates" / "custom_themes.json"
+        
+        if custom_themes_file.exists():
+            with open(custom_themes_file, 'r', encoding='utf-8') as f:
+                custom_data = json.load(f)
+                
+            # Agregar temas custom a THEMES_CONFIG
+            custom_themes = custom_data.get("custom_themes", {})
+            if custom_themes:
+                THEMES_CONFIG.update(custom_themes)
+                print(f"✅ Cargados {len(custom_themes)} temas personalizados")
+            return True
+    except Exception as e:
+        print(f"⚠️ No se pudieron cargar temas personalizados: {e}")
+    
+    return False
+
+# Cargar temas personalizados al importar el módulo
+load_custom_themes()
+
 # ===== FUNCIONES DE CONFIGURACIÓN =====
 
 def get_language_config(language: str = None) -> dict:

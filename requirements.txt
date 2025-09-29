@@ -2,6 +2,9 @@
 openai>=1.3.0
 requests>=2.31.0
 python-dotenv>=1.0.0
+
+# Ollama support (IA local gratuita)
+# Nota: Ollama se instala por separado desde https://ollama.ai
 moviepy>=1.0.3
 pillow>=10.0.0
 edge-tts>=6.1.0

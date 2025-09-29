@@ -1,6 +1,6 @@
 """
 Generador de contenido usando IA para YouTube.
-Especializado en TOP 10 y curiosidades en español.
+Soporte para OpenAI (pago) y Ollama (local gratuito).
 """
 
 import openai
@@ -8,6 +8,13 @@ import logging
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 from config.settings import settings, CONTENT_TEMPLATES
+
+# Importar Ollama generator
+try:
+    from .ollama_generator import OllamaGenerator, OllamaConfig
+    OLLAMA_AVAILABLE = True
+except ImportError:
+    OLLAMA_AVAILABLE = False
 try:
     from config.localization import (
         get_current_config, get_theme_config, 
@@ -48,13 +55,17 @@ class GeneratedContent:
     seo_score: float
 
 class ContentGenerator:
-    """Generador de contenido principal."""
+    """Generador de contenido principal con soporte OpenAI y Ollama."""
     
-    def __init__(self, language: str = None, theme: str = None):
-        """Inicializa el generador con la API de OpenAI."""
-        if not settings.OPENAI_API_KEY:
-            raise ValueError("OPENAI_API_KEY no configurada")
+    def __init__(self, language: str = None, theme: str = None, use_ollama: bool = None):
+        """
+        Inicializa el generador.
         
+        Args:
+            language: Idioma del contenido
+            theme: Tema del contenido  
+            use_ollama: Si usar Ollama (None = auto-detectar)
+        """
         # Configuración localizada
         self.language = language or settings.LANGUAGE
         self.theme = theme or settings.THEME
@@ -62,8 +73,52 @@ class ContentGenerator:
         self.theme_config = get_theme_config(self.theme, self.language)
         self.texts = get_localized_texts(self.language)
         
-        openai.api_key = settings.OPENAI_API_KEY
-        logger.info("ContentGenerator inicializado")
+        # Configurar proveedores de IA
+        self.ollama_generator = None
+        self.use_ollama = use_ollama
+        
+        # Auto-detectar mejor opción si no se especifica
+        if use_ollama is None:
+            self.use_ollama = self._auto_select_ai_provider()
+        
+        if self.use_ollama and OLLAMA_AVAILABLE:
+            try:
+                self.ollama_generator = OllamaGenerator()
+                if self.ollama_generator.is_installed:
+                    logger.info("✅ Usando Ollama (IA local gratuita)")
+                else:
+                    logger.warning("Ollama no disponible, usando OpenAI")
+                    self.use_ollama = False
+            except Exception as e:
+                logger.warning(f"Error configurando Ollama: {e}")
+                self.use_ollama = False
+        
+        # Configurar OpenAI como fallback
+        if not self.use_ollama:
+            if not settings.OPENAI_API_KEY:
+                raise ValueError("Se necesita OPENAI_API_KEY o instalar Ollama para funcionar")
+            openai.api_key = settings.OPENAI_API_KEY
+            logger.info("💳 Usando OpenAI (servicio de pago)")
+        
+        logger.info(f"ContentGenerator inicializado - Proveedor: {'Ollama' if self.use_ollama else 'OpenAI'}")
+    
+    def _auto_select_ai_provider(self) -> bool:
+        """Auto-selecciona el mejor proveedor de IA disponible."""
+        # Prioridad: Ollama (gratis) > OpenAI (pago)
+        if OLLAMA_AVAILABLE:
+            try:
+                test_generator = OllamaGenerator()
+                if test_generator.is_installed:
+                    logger.info("🎯 Auto-seleccionado: Ollama (gratuito)")
+                    return True
+            except:
+                pass
+        
+        if settings.OPENAI_API_KEY:
+            logger.info("🎯 Auto-seleccionado: OpenAI (de pago)")
+            return False
+        
+        raise ValueError("No hay proveedores de IA disponibles. Instala Ollama o configura OPENAI_API_KEY")
     
     def _build_localized_prompt(self, request: ContentRequest) -> dict:
         """Construye prompts localizados basados en configuración."""
@@ -150,7 +205,26 @@ class ContentGenerator:
             raise
     
     def _generate_script(self, request: ContentRequest, template: Dict) -> str:
-        """Genera el guión principal usando OpenAI."""
+        """Genera el guión principal usando Ollama u OpenAI."""
+        
+        if self.use_ollama and self.ollama_generator:
+            # Usar Ollama (gratuito)
+            logger.info("🆓 Generando con Ollama (IA local)")
+            
+            ollama_result = self.ollama_generator.generate_shorts_script(
+                topic=request.topic,
+                language=self.language,
+                content_type=request.content_type
+            )
+            
+            if ollama_result:
+                return ollama_result["script"]
+            else:
+                logger.warning("Ollama falló, usando OpenAI como fallback")
+                self.use_ollama = False
+        
+        # Usar OpenAI (de pago) 
+        logger.info("💳 Generando con OpenAI")
         
         prompt = template["user_prompt"].format(
             topic=request.topic,
@@ -172,7 +246,7 @@ class ContentGenerator:
             return response.choices[0].message.content.strip()
             
         except Exception as e:
-            logger.error(f"Error en OpenAI API: {e}")
+            logger.error(f"Error en IA: {e}")
             raise
     
     def _extract_title(self, script: str) -> str:

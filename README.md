@@ -4,23 +4,23 @@
 
 ## ✨ Características Principales
 
-- 🤖 **Generación de contenido automática** con GPT-4 optimizado para Shorts
+- 🤖 **Generación de contenido automática** con Ollama (gratuito) o GPT-4 (premium)
 - 🎥 **Videos verticales (9:16)** perfectos para móvil y algoritmo de Shorts  
 - 🗣️ **Síntesis de voz natural** con Edge TTS multiidioma
 - 📱 **Formato ultra-optimizado**: 30-60 segundos de duración ideal
 - 🔄 **Publicación automática** en YouTube con SEO optimizado
-- 💰 **Ultra económico**: $5-15/mes vs $681/año de alternativas cloud
+- 💰 **Dos modalidades**: 100% Gratuito con Ollama (IA local) o Premium con OpenAI
 
 ## 🎯 ¿Por qué YouTube Shorts?
 
-| Formato | Shorts | Videos Largos |
-|---------|--------|---------------|
-| **Duración** | 30-60 segundos | 8-15 minutos |
-| **Costo por video** | $0.10-0.50 | $2-5 |
-| **Tiempo de producción** | 5 minutos | 30-60 minutos |
-| **Volumen diario** | 5-15 videos | 1-3 videos |
-| **Alcance algoritmo** | 🔥 Preferencial | 📈 Estándar |
-| **ROI** | 3-6 meses | 12-24 meses |
+| Aspecto | Shorts (Ollama) | Shorts (OpenAI) | Videos Largos |
+|---------|-----------------|-----------------|---------------|
+| **Duración** | 30-60 segundos | 30-60 segundos | 8-15 minutos |
+| **Costo por video** | $0.00 | $0.03-0.10 | $0.00-3.00 |
+| **Tiempo de producción** | 3-5 minutos | 2-3 minutos | 30-60 minutos |
+| **Volumen diario** | 10-30 videos | 15-50 videos | 1-3 videos |
+| **Alcance algoritmo** | 🔥 Preferencial | 🔥 Preferencial | 📈 Estándar |
+| **ROI** | 1-3 meses | 2-4 meses | 8-18 meses |
 
 ## 🚀 Instalación Rápida
 
@@ -38,12 +38,24 @@ pip install -r requirements.txt
 
 Crear archivo `.env`:
 ```env
-# IA y APIs
-OPENAI_API_KEY=tu_clave_openai_aqui
+# 🎯 ELECCIÓN DE IA (elige una opción):
 
-# Configuración de contenido
+# Opción 1: 100% GRATUITO con Ollama (IA local)
+# Instala Ollama desde: https://ollama.ai
+# Luego ejecuta: ollama pull llama3.1:8b
+USE_OLLAMA=true
+
+# Opción 2: OpenAI (de pago, más rápido)
+# OPENAI_API_KEY=tu_clave_openai_aqui
+# USE_OLLAMA=false
+
+# ⚙️ CONFIGURACIÓN BÁSICA
 CONTENT_LANGUAGE=es  # es, en, pt, fr, it, de
 CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
+
+# 🚫 OPCIONAL - Funciones extra
+# YOUTUBE_CLIENT_ID=para_subida_automatica
+# UNSPLASH_ACCESS_KEY=para_mas_imagenes
 ```
 
 **Idiomas disponibles:**
@@ -66,21 +78,98 @@ CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
 - 🎵 `musica` - Artistas, géneros y datos musicales
 - 🔬 `ciencia` - Descubrimientos y experimentos
 
-> **💡 Tip**: Puedes crear temas personalizados modificando los prompts en `templates/`
+### 🎨 **Crear Temas Personalizados**
 
-### 3. ¡Crear tu primer Short!
+¿Quieres un nicho específico? ¡Crea tu propio tema!
+
+**Ejemplos de temas custom**:
+- 🎮 `gaming` - Trucos, reviews, curiosidades gaming
+- 🏃 `fitness` - Ejercicios caseros, rutinas, nutrición
+- 🍳 `cocina` - Recetas rápidas, tips culinarios
+- 💰 `finanzas` - Ahorro, inversiones, apps financieras
+- 🎨 `arte` - Tutoriales, técnicas, inspiración creativa
+
+**Pasos para crear tu tema**:
+
+1. **Configura tu tema** en `templates/custom_themes.json`:
+```json
+{
+  "mi_tema": {
+    "es": {
+      "channel_name": "Mi Canal Viral",
+      "description": "Tu descripción aquí",
+      "tags_base": ["tag1", "tag2", "viral"],
+      "content_types": ["TOP_5", "MI_FORMATO"],
+      "topics_pool": ["tema 1", "tema 2", "tema 3"]
+    }
+  }
+}
+```
+
+2. **Crea prompts específicos** en `templates/prompts/mi_tema_es.md`
+
+3. **Activa tu tema**:
+```bash
+CONTENT_THEME=mi_tema python main.py
+```
+
+> **📚 Guía completa**: Ver `templates/examples/guia_temas_personalizados.md` para instrucciones detalladas
+
+### 3a. OPCIÓN GRATUITA: Instalar Ollama (Recomendado)
+
+```bash
+# 1. Descargar Ollama para Windows
+# Visita: https://ollama.ai/download/windows
+
+# 2. Instalar el modelo (una sola vez)
+ollama pull llama3.1:8b
+
+# 3. Verificar instalación
+ollama list
+
+# 4. ¡Ya tienes IA gratuita!
+```
+
+**Requisitos recomendados para Ollama:**
+- **Mínimo**: 8GB RAM + CPU moderna (funciona en cualquier PC reciente)
+- **Recomendado**: 16GB+ RAM + GPU NVIDIA/AMD (mayor velocidad)
+- **Óptimo**: 32GB+ RAM + GPU dedicada (máximo rendimiento)
+- **Modelo recomendado**: Llama 3.1:8B (balance perfecto calidad/velocidad)
+- **Costo**: $0 para siempre
+
+> **💡 Ejemplo real**: Con Ryzen 2600x + GTX 1660Ti + 16GB RAM obtienes generación ultra rápida
+
+### 3b. OPCIÓN DE PAGO: Usar OpenAI
+
+Si prefieres OpenAI, simplemente agrega tu API key al `.env`.
+
+### 4. ¡Crear tu primer Short!
 
 ```bash
 python main.py
 ```
 
-## 🛠 Tecnologías
+## 🤖 **Opciones de IA: Elige tu Modalidad**
 
-- **Python 3.11+** - Base del sistema
-- **OpenAI GPT-4** - Generación de contenido viral
-- **Edge TTS** - Síntesis de voz natural multiidioma
-- **PIL/Pillow** - Procesamiento de imágenes optimizado
-- **YouTube Data API** - Publicación automática
+### 🆓 **Modalidad Gratuita (Ollama)**
+- **Ollama + Llama 3.1:8B** - IA local de alta calidad ✅ Gratis
+- **Edge TTS** - Síntesis de voz multiidioma ✅ Gratis  
+- **Ventajas**: $0 costo, privacidad total, sin límites
+- **Ideal para**: Usuarios con hardware decente, presupuesto $0
+
+### 💎 **Modalidad Premium (OpenAI)**
+- **OpenAI GPT-4** - IA en la nube de máxima calidad 💳 De pago
+- **Edge TTS** - Síntesis de voz multiidioma ✅ Gratis
+- **Ventajas**: Velocidad extrema, sin configuración
+- **Ideal para**: Usuarios que priorizan velocidad sobre costo
+
+## � Stack Tecnológico Común
+
+- **Python 3.11+** - Base del sistema ✅ Gratuito
+- **Edge TTS** - Síntesis de voz natural multiidioma ✅ Gratuito
+- **PIL/Pillow** - Procesamiento de imágenes ✅ Gratuito
+- **MoviePy** - Edición de video automatizada ✅ Gratuito
+- **YouTube Data API** - Publicación automática ✅ Gratuito
 
 ## 💡 Flujo de Trabajo Automático
 
@@ -148,17 +237,50 @@ VIDEO_CONFIG = {
 
 ## 💰 Análisis de Costos Shorts
 
-### Costos Mensuales (Producción 10 Shorts/día)
-- **OpenAI GPT-4**: $5-10
-- **APIs opcionales**: $0-5  
-- **Hosting**: $0 (GitHub)
-- **Total**: **$5-15/mes**
+### 🎯 **DOS OPCIONES DE IA** - Tú eliges tu presupuesto
 
-### Comparación con Competencia
-- **Esta solución**: $16/año
-- **N8N Cloud**: $681/año
-- **Zapier Pro**: $588/año
-- **Ahorro**: **97% más económico**
+| Servicio | Opción Gratuita | Opción de Pago |
+|----------|-----------------|------------------|
+| **IA para contenido** | Ollama (local) ✅ $0 | OpenAI 💳 $9-30/mes |
+| **Síntesis de voz** | Edge TTS ✅ $0 | Edge TTS ✅ $0 |
+| **YouTube API** | ✅ $0/mes | ✅ $0/mes |
+| **Video/Imágenes** | ✅ $0/mes | ✅ $0/mes |
+| **Hosting** | ✅ $0/mes | ✅ $0/mes |
+
+### 🆓 **Opción 100% Gratuita (Ollama)**
+| Aspecto | Detalles |
+|---------|----------|
+| **Costo por Short** | **$0.00** |
+| **Costo mensual** | **$0.00** 🎉 |
+| **Velocidad** | Rápida (depende de hardware) |
+| **Calidad** | Excelente para Shorts |
+| **Requisitos** | 8GB+ RAM, CPU moderna |
+| **Privacidad** | 100% local, datos seguros |
+| **Límites** | Sin límites de uso |
+
+### 💳 **Opción Premium (OpenAI)**
+| Aspecto | Detalles |
+|---------|----------|
+| **Costo por Short** | $0.03-0.10 |
+| **Costo mensual** | $9-30 (según uso) |
+| **Velocidad** | Ultra rápida |
+| **Calidad** | Premium, más sofisticada |
+| **Requisitos** | Solo conexión internet |
+| **Disponibilidad** | 24/7 sin configuración |
+| **Límites** | Según plan de OpenAI |
+
+### 📊 Comparación Anual con Competencia
+
+| Solución | Con Ollama | Con OpenAI | Competencia |
+|----------|------------|------------|-------------|
+| **AI Shorts Factory** | **$0/año** 🎉 | $108-360/año | - |
+| **N8N Cloud** | - | - | $681/año + APIs |
+| **Zapier Pro** | - | - | $588/año + APIs |
+| **Make.com** | - | - | $468/año + APIs |
+
+**Ahorro real:**
+- Con Ollama: **100% gratuito** vs $468-681/año
+- Con OpenAI: **40-84% más económico** vs competencia
 
 ## 🔧 Configuración Avanzada
 
@@ -189,10 +311,20 @@ TARGET_DURATION=45
 - ✅ Cumplimiento términos YouTube
 - ✅ Escalabilidad ilimitada
 
-### ⚠️ Requisitos
-- Clave OpenAI (GPT-4 recomendado)
+### ⚠️ Requisitos del Sistema
+
+**Opción Gratuita (Ollama):**
 - Python 3.11+ instalado
+- 8GB+ RAM (16GB+ recomendado)
+- ~10GB espacio en disco (para modelos IA)
+- CPU moderna (cualquiera de los últimos 5 años)
+- GPU opcional (acelera la generación)
+
+**Opción de Pago (OpenAI):**
+- Python 3.11+ instalado
+- Clave OpenAI API (GPT-4 recomendado)
 - Conexión a internet estable
+- Requisitos mínimos de hardware
 
 ## 🔄 Roadmap
 
