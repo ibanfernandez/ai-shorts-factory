@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run basic tests
+      run: |
+        python -c "from src.content_generator import ContentGenerator; print('✅ Content generator imports correctly')"
+        python -c "from src.video_creator import VideoCreator; print('✅ Video creator imports correctly')"
+        python -c "from config.settings import Settings; print('✅ Settings loads correctly')"
+    
+    - name: Check code style
+      run: |
+        pip install flake8
+        flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 src/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
