@@ -1,12 +1,12 @@
 # AI Shorts Factory 🚀
 
-> **Automatización completa para crear YouTube Shorts virales con IA - Optimizado para contenido TOP 5 y curiosidades en español**
+> **Automatización completa para crear YouTube Shorts virales con IA - Multiidioma y multitemática, optimizado para cualquier tipo de contenido**
 
 ## ✨ Características Principales
 
 - 🤖 **Generación de contenido automática** con GPT-4 optimizado para Shorts
 - 🎥 **Videos verticales (9:16)** perfectos para móvil y algoritmo de Shorts  
-- 🗣️ **Síntesis de voz natural** con Edge TTS en español
+- 🗣️ **Síntesis de voz natural** con Edge TTS multiidioma
 - 📱 **Formato ultra-optimizado**: 30-60 segundos de duración ideal
 - 🔄 **Publicación automática** en YouTube con SEO optimizado
 - 💰 **Ultra económico**: $5-15/mes vs $681/año de alternativas cloud
@@ -27,8 +27,8 @@
 ### 1. Clonar y Configurar
 
 ```bash
-git clone https://github.com/tu-usuario/yt-ia-automate.git
-cd yt-ia-automate
+git clone https://github.com/ibanfernandez/ai-shorts-factory.git
+cd ai-shorts-factory
 python -m venv .venv
 .venv\Scripts\activate  # Windows
 pip install -r requirements.txt
@@ -58,6 +58,15 @@ CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
 - 🔍 `curiosidades` - Datos increíbles y sorprendentes
 - 💻 `tecnologia` - Gadgets e innovación
 - 📚 `historia` - Secretos y misterios del pasado
+- 🎬 `entretenimiento` - Películas, series y celebridades
+- 🍕 `comida` - Recetas y datos gastronómicos
+- ⚽ `deportes` - Estadísticas y curiosidades deportivas
+- 🌍 `viajes` - Destinos y culturas del mundo
+- 💰 `negocios` - Emprendimiento y finanzas
+- 🎵 `musica` - Artistas, géneros y datos musicales
+- 🔬 `ciencia` - Descubrimientos y experimentos
+
+> **💡 Tip**: Puedes crear temas personalizados modificando los prompts en `templates/`
 
 ### 3. ¡Crear tu primer Short!
 
@@ -69,14 +78,14 @@ python main.py
 
 - **Python 3.11+** - Base del sistema
 - **OpenAI GPT-4** - Generación de contenido viral
-- **Edge TTS** - Síntesis de voz natural en español
+- **Edge TTS** - Síntesis de voz natural multiidioma
 - **PIL/Pillow** - Procesamiento de imágenes optimizado
 - **YouTube Data API** - Publicación automática
 
 ## 💡 Flujo de Trabajo Automático
 
-1. **🧠 IA genera contenido** - TOP 5 viral optimizado para Shorts
-2. **🎤 Síntesis de voz** - Audio natural en español con Edge TTS
+1. **🧠 IA genera contenido** - Viral optimizado para Shorts en cualquier idioma
+2. **🎤 Síntesis de voz** - Audio natural multiidioma con Edge TTS
 3. **🖼️ Búsqueda de imágenes** - Imágenes relevantes automáticas
 4. **🎬 Composición vertical** - Video 1080x1920 para móviles
 5. **🎨 Thumbnail automático** - Miniatura atractiva generada
@@ -85,7 +94,7 @@ python main.py
 ## 📁 Estructura del Proyecto
 
 ```
-yt-ia-automate/
+ai-shorts-factory/
 ├── 📄 main.py              # Punto de entrada principal
 ├── ⚙️ setup.py             # Configuración inicial
 ├── 📦 requirements.txt     # Dependencias
@@ -176,7 +185,7 @@ TARGET_DURATION=45
 ### ✅ Incluido
 - ✅ Contenido 100% original generado por IA
 - ✅ Optimización para algoritmo de Shorts
-- ✅ SEO automático en español
+- ✅ SEO automático multiidioma
 - ✅ Cumplimiento términos YouTube
 - ✅ Escalabilidad ilimitada
 
