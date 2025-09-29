@@ -11,7 +11,7 @@ DEFAULT_LANGUAGE = "es"  # Español
 
 # Temática principal del canal
 DEFAULT_THEME = "curiosidades"
-# Opciones: "curiosidades", "tecnologia", "historia", "ciencia", "deportes", "entretenimiento"
+# Opciones: "curiosidades", "tecnologia", "historia", "entretenimiento", "comida", "deportes", "viajes", "negocios", "musica", "ciencia"
 
 # ===== CONFIGURACIÓN POR IDIOMAS =====
 
@@ -150,6 +150,202 @@ THEMES_CONFIG = {
                 "inventions that changed the world",
                 "most influential people in history",
                 "most mysterious lost civilizations"
+            ]
+        }
+    },
+    "entretenimiento": {
+        "es": {
+            "channel_name": "Entre Viral",
+            "description": "Lo mejor del entretenimiento, películas, series y celebridades",
+            "tags_base": ["entretenimiento", "peliculas", "series", "celebridades", "viral"],
+            "content_types": ["TOP_5", "CELEBS", "CINE_TV"],
+            "topics_pool": [
+                "actores más pagados de Hollywood",
+                "películas más taquilleras de la historia",
+                "series más adictivas del momento",
+                "secretos de celebridades famosas",
+                "escenas más épicas del cine"
+            ]
+        },
+        "en": {
+            "channel_name": "Entertainment Viral",
+            "description": "The best of entertainment, movies, series and celebrities",
+            "tags_base": ["entertainment", "movies", "series", "celebrities", "viral"],
+            "content_types": ["TOP_5", "CELEBS", "MOVIES_TV"],
+            "topics_pool": [
+                "highest paid actors in Hollywood",
+                "highest grossing movies in history",
+                "most addictive series of the moment",
+                "secrets of famous celebrities",
+                "most epic scenes in cinema"
+            ]
+        }
+    },
+    "comida": {
+        "es": {
+            "channel_name": "Sabores Virales",
+            "description": "Recetas increíbles y datos gastronómicos sorprendentes",
+            "tags_base": ["comida", "recetas", "gastronomia", "cocina", "viral"],
+            "content_types": ["TOP_5", "RECETAS", "GASTRONOMIA"],
+            "topics_pool": [
+                "comidas más caras del mundo",
+                "platos más raros de diferentes países",
+                "ingredientes más exóticos que existen",
+                "restaurantes más exclusivos del planeta",
+                "datos curiosos sobre la comida"
+            ]
+        },
+        "en": {
+            "channel_name": "Viral Flavors",
+            "description": "Incredible recipes and surprising gastronomic facts",
+            "tags_base": ["food", "recipes", "gastronomy", "cooking", "viral"],
+            "content_types": ["TOP_5", "RECIPES", "GASTRONOMY"],
+            "topics_pool": [
+                "most expensive foods in the world",
+                "weirdest dishes from different countries",
+                "most exotic ingredients that exist",
+                "most exclusive restaurants on the planet",
+                "curious facts about food"
+            ]
+        }
+    },
+    "deportes": {
+        "es": {
+            "channel_name": "Deporte Viral",
+            "description": "Estadísticas increíbles y curiosidades deportivas",
+            "tags_base": ["deportes", "estadisticas", "futbol", "records", "viral"],
+            "content_types": ["TOP_5", "ESTADISTICAS", "RECORDS"],
+            "topics_pool": [
+                "records deportivos más impresionantes",
+                "jugadores más veloces del mundo",
+                "estadios más grandes del planeta",
+                "momentos más épicos del deporte",
+                "datos locos del fútbol mundial"
+            ]
+        },
+        "en": {
+            "channel_name": "Sports Viral",
+            "description": "Incredible statistics and sports curiosities",
+            "tags_base": ["sports", "statistics", "soccer", "records", "viral"],
+            "content_types": ["TOP_5", "STATS", "RECORDS"],
+            "topics_pool": [
+                "most impressive sports records",
+                "fastest players in the world",
+                "largest stadiums on the planet",
+                "most epic moments in sports",
+                "crazy facts about world soccer"
+            ]
+        }
+    },
+    "viajes": {
+        "es": {
+            "channel_name": "Viajes Virales",
+            "description": "Destinos increíbles y culturas fascinantes del mundo",
+            "tags_base": ["viajes", "destinos", "culturas", "turismo", "viral"],
+            "content_types": ["TOP_5", "DESTINOS", "CULTURAS"],
+            "topics_pool": [
+                "destinos más baratos para viajar",
+                "países más seguros del mundo",
+                "culturas más fascinantes del planeta",
+                "lugares más fotogénicos para Instagram",
+                "ciudades más caras para vivir"
+            ]
+        },
+        "en": {
+            "channel_name": "Travel Viral",
+            "description": "Incredible destinations and fascinating cultures of the world",
+            "tags_base": ["travel", "destinations", "cultures", "tourism", "viral"],
+            "content_types": ["TOP_5", "DESTINATIONS", "CULTURES"],
+            "topics_pool": [
+                "cheapest destinations to travel",
+                "safest countries in the world",
+                "most fascinating cultures on the planet",
+                "most photogenic places for Instagram",
+                "most expensive cities to live in"
+            ]
+        }
+    },
+    "negocios": {
+        "es": {
+            "channel_name": "Business Viral",
+            "description": "Emprendimiento, finanzas y éxito empresarial",
+            "tags_base": ["negocios", "emprendimiento", "finanzas", "exito", "viral"],
+            "content_types": ["TOP_5", "EMPRESAS", "FINANZAS"],
+            "topics_pool": [
+                "empresarios más jóvenes del mundo",
+                "negocios más rentables del momento",
+                "inversiones más inteligentes que puedes hacer",
+                "marcas más valiosas del planeta",
+                "historias de éxito empresarial increíbles"
+            ]
+        },
+        "en": {
+            "channel_name": "Business Viral",
+            "description": "Entrepreneurship, finance and business success",
+            "tags_base": ["business", "entrepreneurship", "finance", "success", "viral"],
+            "content_types": ["TOP_5", "COMPANIES", "FINANCE"],
+            "topics_pool": [
+                "youngest entrepreneurs in the world",
+                "most profitable businesses right now",
+                "smartest investments you can make",
+                "most valuable brands on the planet",
+                "incredible business success stories"
+            ]
+        }
+    },
+    "musica": {
+        "es": {
+            "channel_name": "Música Viral",
+            "description": "Artistas, géneros y datos musicales fascinantes",
+            "tags_base": ["musica", "artistas", "canciones", "generos", "viral"],
+            "content_types": ["TOP_5", "ARTISTAS", "CANCIONES"],
+            "topics_pool": [
+                "artistas más escuchados del mundo",
+                "canciones más virales de la historia",
+                "géneros musicales más raros que existen",
+                "instrumentos más difíciles de tocar",
+                "datos curiosos de tus artistas favoritos"
+            ]
+        },
+        "en": {
+            "channel_name": "Music Viral",
+            "description": "Artists, genres and fascinating musical facts",
+            "tags_base": ["music", "artists", "songs", "genres", "viral"],
+            "content_types": ["TOP_5", "ARTISTS", "SONGS"],
+            "topics_pool": [
+                "most listened artists in the world",
+                "most viral songs in history",
+                "weirdest music genres that exist",
+                "most difficult instruments to play",
+                "curious facts about your favorite artists"
+            ]
+        }
+    },
+    "ciencia": {
+        "es": {
+            "channel_name": "Ciencia Viral",
+            "description": "Descubrimientos científicos y experimentos fascinantes",
+            "tags_base": ["ciencia", "experimentos", "descubrimientos", "fisica", "viral"],
+            "content_types": ["TOP_5", "EXPERIMENTOS", "DESCUBRIMIENTOS"],
+            "topics_pool": [
+                "experimentos científicos más peligrosos",
+                "descubrimientos que cambiaron la humanidad",
+                "teorías científicas más controversiales",
+                "inventos del futuro que ya existen",
+                "datos científicos que te van a sorprender"
+            ]
+        },
+        "en": {
+            "channel_name": "Science Viral",
+            "description": "Scientific discoveries and fascinating experiments",
+            "tags_base": ["science", "experiments", "discoveries", "physics", "viral"],
+            "content_types": ["TOP_5", "EXPERIMENTS", "DISCOVERIES"],
+            "topics_pool": [
+                "most dangerous scientific experiments",
+                "discoveries that changed humanity",
+                "most controversial scientific theories",
+                "future inventions that already exist",
+                "scientific facts that will amaze you"
             ]
         }
     }
