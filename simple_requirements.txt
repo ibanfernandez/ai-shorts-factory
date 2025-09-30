@@ -1,2 +1,39 @@
+# Dependencias completas para la interfaz web
+# NOTA: La interfaz web necesita TODAS las dependencias principales
+# porque importa módulos de generación de IA, video y audio
+
+# IA y Generación de Contenido
+openai>=1.3.0
+python-dotenv>=1.0.0
+
+# Procesamiento de Video y Audio
+moviepy>=1.0.3
+pillow>=10.0.0
+edge-tts>=6.1.0
+
+# APIs y Comunicación
+requests>=2.31.0
+google-auth>=2.17.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+google-api-python-client>=2.70.0
+
+# Procesamiento de Imágenes
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# APIs de terceros
+python-unsplash>=1.0.0
+
+# Utilidades core
+pydantic>=2.0.0
+rich>=13.0.0
+
+# Interfaz Web
 flask==2.3.3
-requests==2.31.0
+
+# Base de datos
+sqlalchemy>=2.0.0
+
+# Scraping (para imágenes)
+beautifulsoup4>=4.12.0

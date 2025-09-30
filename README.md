@@ -5,14 +5,16 @@
 ### **Acceso Rápido a la Interfaz Web**
 
 ```bash
-# 1. Instalar dependencias web (mínimas)
-pip install -r simple_requirements.txt
+# 1. Instalar dependencias completas (REQUERIDAS)
+pip install -r requirements.txt
 
 # 2. Lanzar interfaz web
 python simple_web_app.py
 
 # 3. Abrir navegador en: http://localhost:5000
 ```
+
+> **⚠️ IMPORTANTE**: La interfaz web necesita **TODAS** las dependencias principales porque utiliza los mismos módulos de IA, video y audio que el sistema CLI.
 
 ### **🎮 Funciones de la Interfaz Web**
 
@@ -191,8 +193,9 @@ python main.py
 
 | Error | Solución |
 |-------|----------|
-| `No module named 'flask'` | `pip install -r simple_requirements.txt` |
+| `No module named 'flask'` | `pip install -r requirements.txt` (NO simple_requirements.txt) |
 | `No module named 'openai'` | `pip install -r requirements.txt` |
+| `No module named 'moviepy'` | `pip install -r requirements.txt` - La web necesita TODAS las deps |
 | `sqlite3 not found` | ✅ Solucionado (módulo built-in de Python) |
 | `unknown command "generate"` | ✅ Solucionado - Ollama ahora usa `run` |
 | `UnicodeEncodeError` | Normal en Windows - el sistema funciona |
@@ -200,7 +203,7 @@ python main.py
 | `Ollama connection failed` | Ejecutar `ollama serve` en terminal separada |
 | `Python not found` | Instalar Python 3.9+ desde python.org |
 | Emojis no se ven | Normal en Windows PowerShell - funciona bien |
-| Error al abrir web | Verificar que Flask esté instalado |
+| Error al abrir web | Verificar que TODAS las dependencias estén instaladas |
 
 **Idiomas disponibles:**
 - 🇪🇸 `es` - Español (Voz: Alvaro/Elvira)
@@ -307,6 +310,10 @@ ai-shorts-factory/
 
 ### **Básico Web - Interfaz Gráfica**
 ```bash
+# IMPORTANTE: Instalar TODAS las dependencias primero
+pip install -r requirements.txt
+
+# Luego lanzar la interfaz web
 python simple_web_app.py
 # Abrir http://localhost:5000 y usar la interfaz
 ```
@@ -489,4 +496,4 @@ MIT License - Ver [LICENSE](LICENSE) para detalles.
 
 **📧 Soporte**: [GitHub Issues](https://github.com/ibanfernandez/ai-shorts-factory/issues)
 
-**🌐 Demo**: Ejecuta `python simple_web_app.py` y ve a http://localhost:5000
+**🌐 Demo**: Ejecuta `pip install -r requirements.txt && python simple_web_app.py` y ve a http://localhost:5000
