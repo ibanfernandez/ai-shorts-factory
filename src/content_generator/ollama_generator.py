@@ -143,12 +143,14 @@ class OllamaGenerator:
                 }
             }
             
-            # Ejecutar Ollama
+            # Ejecutar Ollama con el comando correcto y encoding UTF-8
             process = subprocess.run(
-                ["ollama", "generate", self.config.model, prompt],
-                input=json.dumps(ollama_prompt),
+                ["ollama", "run", self.config.model],
+                input=prompt,
                 capture_output=True,
                 text=True,
+                encoding='utf-8',
+                errors='replace',  # Reemplazar caracteres problemáticos
                 timeout=300  # 5 minutos timeout
             )
             
@@ -168,66 +170,87 @@ class OllamaGenerator:
             return None
     
     def generate_shorts_script(self, topic: str, language: str = "es", 
-                              content_type: str = "TOP_5") -> Optional[Dict]:
+                              content_type: str = "TOP_5", topic_data: dict = None) -> Optional[Dict]:
         """
-        Genera un script específico para YouTube Shorts.
+        Genera un script específico para YouTube Shorts con prompts variables.
         
         Args:
             topic: Tema del Short
             language: Idioma (es, en, pt, fr, it, de)
             content_type: Tipo de contenido (TOP_5, CURIOSIDADES)
+            topic_data: Datos del tema con prompts variables y hooks
             
         Returns:
             dict: Script estructurado para Shorts
         """
         
-        # Prompts optimizados por idioma
+        # 🎯 SISTEMA DE PROMPTS VARIABLES Y DINÁMICOS
+        
+        # Extraer hook y ending personalizados si están disponibles
+        custom_hook = topic_data.get('hook', '¿Sabías que hay secretos que te van a impactar?') if topic_data else '¿Sabías que hay secretos que te van a impactar?'
+        custom_ending = topic_data.get('ending', '¿Cuál te impactó más? Déjalo en comentarios.') if topic_data else '¿Cuál te impactó más? Déjalo en comentarios.'
+        custom_prompt = topic_data.get('prompt', f'Crea contenido viral sobre {topic}') if topic_data else f'Crea contenido viral sobre {topic}'
+        
+        # Prompts optimizados por idioma con variabilidad extrema
         prompts = {
             "es": {
-                "TOP_5": f"""Crea un guion para YouTube Short de 45-60 segundos sobre "{topic}".
+                "TOP_5": f"""{custom_prompt}
 
-FORMATO REQUERIDO:
-- Título llamativo (máx 60 caracteres)
-- Hook inicial potente (3-5 segundos)
-- 5 puntos principales numerados
-- Transiciones rápidas entre puntos
-- Call-to-action final
-- Hashtags relevantes
+🎯 INSTRUCCIONES ESPECÍFICAS PARA SHORTS VIRALES:
+- Duración: 45-75 segundos (óptimo para algoritmo)
+- Formato: TOP 5 ranking dinámico
+- Tono: Impactante, revelador, que genere curiosidad extrema
+- Hook inicial personalizado: "{custom_hook}"
+- Cierre viral: "{custom_ending}"
 
-ESTILO:
-- Energético y viral
-- Frases cortas y impactantes
-- Datos sorprendentes
-- Lenguaje juvenil español
+RESPONDE CON ESTE FORMATO EXACTO:
 
-DURACIÓN: 45-60 segundos máximo
-AUDIENCIA: 16-35 años hispanohablante
+TÍTULO: [título súper llamativo con emojis que genere clicks]
+
+NARRACIÓN: [SOLO el texto que debe leer el locutor - texto narrativo puro y natural, SIN instrucciones técnicas, SIN descripciones de imágenes, SIN tiempos]
+
+DESCRIPCIÓN: [descripción SEO optimizada para YouTube]
+
+TAGS: [8-10 hashtags virales]
+
+THUMBNAIL: [3 ideas impactantes para miniatura]
+
+ESTRUCTURA NARRATIVA REQUERIDA:
+1. Hook personalizado: "{custom_hook}"
+2. Introducción rápida al tema (5-8 segundos)
+3. TOP 5 elementos en orden ascendente de impacto
+4. Transiciones rápidas entre puntos
+5. Cierre viral: "{custom_ending}"
+
+EJEMPLO DE ESTRUCTURA:
+"{custom_hook} Te voy a revelar el TOP 5 de {topic} que van a cambiar tu perspectiva. En el quinto lugar... [desarrollar]. El cuarto dato es aún más perturbador... [continuar]. El tercero te va a impactar... [continuar]. El segundo lugar es escalofriante... [continuar]. Y el número uno... esto es absolutamente increíble... [clímax]. {custom_ending}"
+
+GENERA TEXTO NARRATIVO PURO - sin instrucciones como 'mostrar imagen X' o 'pausa dramática'.""",
+                
+                "CURIOSIDADES": f"""{custom_prompt}
+
+🎯 FORMATO CURIOSIDADES VIRALES:
+- Hook: "{custom_hook}"
+- 3-5 datos impactantes
+- Cierre: "{custom_ending}"
+- Duración: 30-50 segundos
+
+RESPONDE CON ESTE FORMATO EXACTO:
+
+TÍTULO: [título impactante con emojis]
+
+NARRACIÓN: [SOLO texto para locutor - narrativo puro, SIN instrucciones técnicas]
+
+DESCRIPCIÓN: [descripción SEO]
+
+TAGS: [hashtags virales]
+
+THUMBNAIL: [3 sugerencias impactantes]
 
 ESTRUCTURA:
-[TÍTULO]
-[HOOK]
-[PUNTO 1]
-[PUNTO 2] 
-[PUNTO 3]
-[PUNTO 4]
-[PUNTO 5]
-[OUTRO]
-[HASHTAGS]""",
-                
-                "CURIOSIDADES": f"""Crea contenido viral de curiosidades sobre "{topic}" para YouTube Short.
+"{custom_hook} Te voy a contar datos sobre {topic} que te van a volar la mente. Primer dato: [impactante]. Segundo: [más impactante]. Tercero: [escalofriante]. {custom_ending}"
 
-FORMATO:
-- Título impactante (máx 60 caracteres)
-- Intro que enganche (¿Sabías que...?)
-- 3-5 datos increíbles numerados
-- Final sorprendente
-- Hashtags virales
-
-ESTILO: Sorprendente, educativo, viral
-DURACIÓN: 30-45 segundos
-IDIOMA: Español natural
-
-Genera el guion completo:"""
+Genera SOLO texto narrativo puro."""
             },
             
             "en": {

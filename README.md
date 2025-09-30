@@ -1,15 +1,102 @@
 # AI Shorts Factory 🚀
 
-> **Automatización completa para crear YouTube Shorts virales con IA - Multiidioma y multitemática, optimizado para cualquier tipo de contenido**
+> **Automatización completa para crear YouTube Shorts virales c## 🌐 Interfaz Web Moderna
+
+### **Acceso Rápido a la Interfaz Web**
+
+```bash
+# 1. Instalar dependencias web (mínimas)
+pip install -r simple_requirements.txt
+
+# 2. Lanzar interfaz web
+python simple_web_app.py
+
+# 3. Abrir navegador en: http://localhost:5000
+```
+
+### **🎮 Funciones de la Interfaz Web**
+
+#### **Pestaña 1: Generador de Videos**
+- 🎯 **Selector de tipo**: TOP 5 o Curiosidades
+- 📝 **Input personalizado**: Escribe cualquier tema
+- ⚡ **Generación automática**: Un clic y listo
+- 📊 **Progreso en tiempo real**: Barra de progreso con polling
+- 🎨 **Diseño moderno**: Gradientes y animaciones
+
+#### **Pestaña 2: Biblioteca de Videos**
+- 📚 **Vista de galería**: Todos tus videos generados
+- ▶️ **Reproductor integrado**: Ve videos sin salir de la interfaz
+- 🗑️ **Gestión completa**: Eliminar videos directamente
+- 📱 **Responsive**: Perfecto en móvil y desktop
+- 🔄 **Actualización automática**: Se actualiza al generar nuevos videos
+
+#### **Pestaña 3: Catálogo de Temas**
+- 📂 **5 Categorías organizadas**:
+  - 🌌 **Espacio y Ciencia**: Planetas, agujeros negros, galaxias
+  - 🔮 **Misterios y Paranormal**: Lugares misteriosos, civilizaciones perdidas
+  - 🦁 **Naturaleza y Animales**: Criaturas raras, superpoderes animales
+  - 🤖 **Tecnología y Futuro**: IA, robots, inventos revolucionarios
+  - 🏛️ **Historia y Cultura**: Batallas épicas, emperadores, tesoros
+- 📝 **Lista de Curiosidades**: Datos sorprendentes listos para usar
+- 🔥 **Selección rápida**: Clic en cualquier tema para usarlo
+
+#### **📊 Dashboard de Estadísticas**
+- 🎬 **Videos Totales**: Contador de videos generados
+- ⚡ **Generaciones Activas**: Procesos en tiempo real
+- 📋 **Temas Disponibles**: Catálogo completo de temas
+
+### **💻 Tecnología Web Stack**
+
+- **🌐 Flask 2.3.3**: Backend ligero y eficiente
+- **🎨 Bootstrap 5**: Interfaz moderna y responsive
+- **⚡ AJAX Polling**: Actualizaciones en tiempo real sin WebSocket
+- **📱 Mobile-First**: Optimizado para todos los dispositivos
+- **🎭 Font Awesome 6**: Iconografía profesional
+
+### **🔧 Características Técnicas Web**
+
+- **🔄 Progreso en tiempo real**: Polling cada 2 segundos
+- **💾 Gestión de archivos**: Servir videos y thumbnails
+- **🗃️ Base de datos en memoria**: Rápida y eficiente
+- **🔒 Compatibilidad total**: Sin dependencias problemáticas
+- **⚡ Arranque instantáneo**: Listo en segundos
+
+## 🎬 Uso del Sistema
+
+### **Opción 1: Línea de Comandos (Tradicional)**
+```bash
+# 1. Asegúrate de que Ollama esté ejecutándose
+ollama serve  # En una terminal separada
+
+# 2. Activar entorno (si no está activo)
+.venv\Scripts\activate  # Windows
+
+# 3. Ejecutar automación
+python main.py
+
+# ¡Tu primer Short estará en output/videos/!
+```
+
+### **Opción 2: Interfaz Web (Recomendado)**
+```bash
+# 1. Lanzar interfaz web
+python simple_web_app.py
+
+# 2. Abrir navegador: http://localhost:5000
+
+# 3. ¡Usar la interfaz visual para todo!
+```e interfaz web moderna y generación masiva optimizada**
 
 ## ✨ Características Principales
 
 - 🤖 **Generación de contenido automática** con Ollama (gratuito) o GPT-4 (premium)
+- 🌐 **Interfaz web moderna** - Control total desde tu navegador
 - 🎥 **Videos verticales (9:16)** perfectos para móvil y algoritmo de Shorts  
 - 🗣️ **Síntesis de voz natural** con Edge TTS multiidioma
 - 📱 **Formato ultra-optimizado**: 30-60 segundos de duración ideal
 - 🔄 **Publicación automática** en YouTube con SEO optimizado
 - 💰 **Dos modalidades**: 100% Gratuito con Ollama (IA local) o Premium con OpenAI
+- 📊 **Dashboard en tiempo real** - Progreso, estadísticas y biblioteca de videos
 
 ## 🎯 ¿Por qué YouTube Shorts?
 
@@ -24,39 +111,96 @@
 
 ## 🚀 Instalación Rápida
 
-### 1. Clonar y Configurar
+### 1. **Requisitos Previos**
+- ✅ **Python 3.9+** (recomendado 3.11 o superior)
+- ✅ **Git** para clonar el repositorio
+- ✅ **Al menos 8GB RAM** (para Ollama local) o clave OpenAI
+
+### 2. **Descargar e Instalar**
 
 ```bash
+# Clonar el proyecto
 git clone https://github.com/ibanfernandez/ai-shorts-factory.git
 cd ai-shorts-factory
+
+# Crear entorno virtual (RECOMENDADO)
 python -m venv .venv
-.venv\Scripts\activate  # Windows
+
+# Activar entorno virtual
+# Windows PowerShell:
+.venv\Scripts\Activate.ps1
+# Windows CMD:
+.venv\Scripts\activate.bat
+
+# Actualizar pip (soluciona errores comunes)
+python -m pip install --upgrade pip
+
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
-### 2. Configurar Idioma y Tema
+### 3. **Configurar IA (OBLIGATORIO)**
 
-Crear archivo `.env`:
-```env
-# 🎯 ELECCIÓN DE IA (elige una opción):
+**Opción A: 🆓 Ollama (100% Gratis)**
+```bash
+# 1. Instalar Ollama desde https://ollama.ai
+# 2. Descargar modelo (requiere 8GB RAM):
+ollama pull llama3.1:8b
 
-# Opción 1: 100% GRATUITO con Ollama (IA local)
-# Instala Ollama desde: https://ollama.ai
-# Luego ejecuta: ollama pull llama3.1:8b
+# 3. Configurar en .env:
 USE_OLLAMA=true
-
-# Opción 2: OpenAI (de pago, más rápido)
-# OPENAI_API_KEY=tu_clave_openai_aqui
-# USE_OLLAMA=false
-
-# ⚙️ CONFIGURACIÓN BÁSICA
-CONTENT_LANGUAGE=es  # es, en, pt, fr, it, de
-CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
-
-# 🚫 OPCIONAL - Funciones extra
-# YOUTUBE_CLIENT_ID=para_subida_automatica
-# UNSPLASH_ACCESS_KEY=para_mas_imagenes
+OLLAMA_MODEL=llama3.1:8b
 ```
+
+**Opción B: 💳 OpenAI (De Pago)**
+```bash
+# Configurar en .env:
+OPENAI_API_KEY=tu-clave-openai-aqui
+USE_OLLAMA=false
+```
+
+### 4. **Configuración Mínima**
+
+Crea el archivo `.env` (copia `.env.example`):
+```env
+# IA - ELIGE UNA OPCIÓN
+USE_OLLAMA=true                    # 🆓 Ollama (local) 
+# OPENAI_API_KEY=sk-tu-clave...    # 💳 OpenAI (pago)
+
+# CONFIGURACIÓN BÁSICA
+CONTENT_LANGUAGE=es                # es, en, pt, fr, it, de
+CONTENT_THEME=curiosidades         # Ver temas disponibles abajo
+```
+
+### 5. **¡Crear tu Primer Short!**
+
+```bash
+# 1. Asegúrate de que Ollama esté ejecutándose
+ollama serve  # En una terminal separada
+
+# 2. Activar entorno (si no está activo)
+.venv\Scripts\activate  # Windows
+
+# 3. Ejecutar automación
+python main.py
+
+# ¡Tu primer Short estará en output/videos/!
+```
+
+## ⚠️ **Solución a Errores Comunes**
+
+| Error | Solución |
+|-------|----------|
+| `No module named 'flask'` | `pip install -r simple_requirements.txt` |
+| `No module named 'openai'` | `pip install -r requirements.txt` |
+| `sqlite3 not found` | ✅ Solucionado (módulo built-in de Python) |
+| `unknown command "generate"` | ✅ Solucionado - Ollama ahora usa `run` |
+| `UnicodeEncodeError` | Normal en Windows - el sistema funciona |
+| `Invalid argument filename` | ✅ Se corregirá automáticamente |
+| `Ollama connection failed` | Ejecutar `ollama serve` en terminal separada |
+| `Python not found` | Instalar Python 3.9+ desde python.org |
+| Emojis no se ven | Normal en Windows PowerShell - funciona bien |
+| Error al abrir web | Verificar que Flask esté instalado |
 
 **Idiomas disponibles:**
 - 🇪🇸 `es` - Español (Voz: Alvaro/Elvira)
@@ -66,7 +210,16 @@ CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
 - 🇮🇹 `it` - Italiano (Voce: Diego/Elsa)
 - 🇩🇪 `de` - Deutsch (Stimme: Conrad/Katja)
 
-**Temas disponibles:**
+## 🍹 **Temas Disponibles**
+
+### **Categorías TOP 5** (En la interfaz web):
+- 🌌 **Espacio y Ciencia**: Planetas extraños, agujeros negros, galaxias lejanas
+- 🔮 **Misterios y Paranormal**: Lugares misteriosos, civilizaciones perdidas
+- 🦁 **Naturaleza y Animales**: Criaturas raras, animales con superpoderes
+- 🤖 **Tecnología y Futuro**: IA avanzada, robots, inventos revolucionarios
+- 🏛️ **Historia y Cultura**: Batallas épicas, emperadores, tesoros perdidos
+
+### **Curiosidades Generales**:
 - 🔍 `curiosidades` - Datos increíbles y sorprendentes
 - 💻 `tecnologia` - Gadgets e innovación
 - 📚 `historia` - Secretos y misterios del pasado
@@ -78,76 +231,9 @@ CONTENT_THEME=curiosidades  # curiosidades, tecnologia, historia
 - 🎵 `musica` - Artistas, géneros y datos musicales
 - 🔬 `ciencia` - Descubrimientos y experimentos
 
-### 🎨 **Crear Temas Personalizados**
 
-¿Quieres un nicho específico? ¡Crea tu propio tema!
 
-**Ejemplos de temas custom**:
-- 🎮 `gaming` - Trucos, reviews, curiosidades gaming
-- 🏃 `fitness` - Ejercicios caseros, rutinas, nutrición
-- 🍳 `cocina` - Recetas rápidas, tips culinarios
-- 💰 `finanzas` - Ahorro, inversiones, apps financieras
-- 🎨 `arte` - Tutoriales, técnicas, inspiración creativa
 
-**Pasos para crear tu tema**:
-
-1. **Configura tu tema** en `templates/custom_themes.json`:
-```json
-{
-  "mi_tema": {
-    "es": {
-      "channel_name": "Mi Canal Viral",
-      "description": "Tu descripción aquí",
-      "tags_base": ["tag1", "tag2", "viral"],
-      "content_types": ["TOP_5", "MI_FORMATO"],
-      "topics_pool": ["tema 1", "tema 2", "tema 3"]
-    }
-  }
-}
-```
-
-2. **Crea prompts específicos** en `templates/prompts/mi_tema_es.md`
-
-3. **Activa tu tema**:
-```bash
-CONTENT_THEME=mi_tema python main.py
-```
-
-> **📚 Guía completa**: Ver `templates/examples/guia_temas_personalizados.md` para instrucciones detalladas
-
-### 3a. OPCIÓN GRATUITA: Instalar Ollama (Recomendado)
-
-```bash
-# 1. Descargar Ollama para Windows
-# Visita: https://ollama.ai/download/windows
-
-# 2. Instalar el modelo (una sola vez)
-ollama pull llama3.1:8b
-
-# 3. Verificar instalación
-ollama list
-
-# 4. ¡Ya tienes IA gratuita!
-```
-
-**Requisitos recomendados para Ollama:**
-- **Mínimo**: 8GB RAM + CPU moderna (funciona en cualquier PC reciente)
-- **Recomendado**: 16GB+ RAM + GPU NVIDIA/AMD (mayor velocidad)
-- **Óptimo**: 32GB+ RAM + GPU dedicada (máximo rendimiento)
-- **Modelo recomendado**: Llama 3.1:8B (balance perfecto calidad/velocidad)
-- **Costo**: $0 para siempre
-
-> **💡 Ejemplo real**: Con Ryzen 2600x + GTX 1660Ti + 16GB RAM obtienes generación ultra rápida
-
-### 3b. OPCIÓN DE PAGO: Usar OpenAI
-
-Si prefieres OpenAI, simplemente agrega tu API key al `.env`.
-
-### 4. ¡Crear tu primer Short!
-
-```bash
-python main.py
-```
 
 ## 🤖 **Opciones de IA: Elige tu Modalidad**
 
@@ -163,13 +249,23 @@ python main.py
 - **Ventajas**: Velocidad extrema, sin configuración
 - **Ideal para**: Usuarios que priorizan velocidad sobre costo
 
-## � Stack Tecnológico Común
+## 🛠️ Stack Tecnológico Completo
 
+### **Core del Sistema**
 - **Python 3.11+** - Base del sistema ✅ Gratuito
 - **Edge TTS** - Síntesis de voz natural multiidioma ✅ Gratuito
 - **PIL/Pillow** - Procesamiento de imágenes ✅ Gratuito
 - **MoviePy** - Edición de video automatizada ✅ Gratuito
 - **YouTube Data API** - Publicación automática ✅ Gratuito
+
+### **Interfaz Web**
+- **Flask 2.3.3** - Servidor web ligero ✅ Gratuito
+- **Bootstrap 5** - Framework UI moderno ✅ Gratuito
+- **AJAX/JavaScript** - Interactividad en tiempo real ✅ Gratuito
+
+### **IA y Generación**
+- **Ollama** - IA local gratuita ✅ Gratuito
+- **OpenAI API** - IA premium en la nube 💳 Opcional
 
 ## 💡 Flujo de Trabajo Automático
 
@@ -179,33 +275,48 @@ python main.py
 4. **🎬 Composición vertical** - Video 1080x1920 para móviles
 5. **🎨 Thumbnail automático** - Miniatura atractiva generada
 6. **📱 Publicación YouTube** - Upload con SEO optimizado
+7. **🌐 Gestión web** - Control total desde la interfaz
 
 ## 📁 Estructura del Proyecto
 
 ```
 ai-shorts-factory/
-├── 📄 main.py              # Punto de entrada principal
-├── ⚙️ setup.py             # Configuración inicial
-├── 📦 requirements.txt     # Dependencias
+├── 📄 main.py                 # Punto de entrada línea de comandos
+├── 🌐 simple_web_app.py       # Interfaz web moderna
+├── ⚙️ setup.py                # Configuración inicial
+├── 📦 requirements.txt        # Dependencias principales
+├── 🌐 simple_requirements.txt # Dependencias web mínimas
 ├── 🔧 config/
-│   └── settings.py         # Configuración central
+│   ├── settings.py            # Configuración central
+│   ├── localization.py        # Soporte multiidioma
+│   └── shorts_config.py       # Configuración específica Shorts
 ├── 🧠 src/
-│   ├── content_generator/  # IA para contenido viral
-│   ├── video_creator/      # Creación de Shorts
-│   └── youtube_publisher/  # Automatización YouTube
-├── 🎨 templates/           # Plantillas de contenido
-├── 📱 assets/              # Recursos visuales
-└── 🎬 output/              # Shorts generados
+│   ├── content_generator/     # IA para contenido viral
+│   ├── video_creator/         # Creación de Shorts
+│   └── youtube_publisher/     # Automatización YouTube
+├── � templates/
+│   └── simple_index.html      # Interfaz web moderna
+├── 🎨 assets/                 # Recursos visuales
+├── 📊 data/                   # Logs y datos
+└── 🎬 output/                 # Shorts generados
+    ├── videos/                # Videos finales
+    └── temp/                  # Archivos temporales
 ```
 
 ## 🎬 Ejemplos de Uso
 
-### Básico - Un Short Automático
+### **Básico Web - Interfaz Gráfica**
+```bash
+python simple_web_app.py
+# Abrir http://localhost:5000 y usar la interfaz
+```
+
+### **Básico CMD - Un Short Automático**
 ```bash
 python main.py
 ```
 
-### Avanzado - Personalizado
+### **Avanzado - Personalizado con Python**
 ```python
 from main import YouTubeAutomation
 
@@ -246,6 +357,7 @@ VIDEO_CONFIG = {
 | **YouTube API** | ✅ $0/mes | ✅ $0/mes |
 | **Video/Imágenes** | ✅ $0/mes | ✅ $0/mes |
 | **Hosting** | ✅ $0/mes | ✅ $0/mes |
+| **Interfaz Web** | ✅ $0/mes | ✅ $0/mes |
 
 ### 🆓 **Opción 100% Gratuita (Ollama)**
 | Aspecto | Detalles |
@@ -293,6 +405,19 @@ TTS_VOICE=es-ES-AlvaroNeural  # Voz personalizada (opcional)
 
 # Core IA
 OPENAI_API_KEY=sk-...
+USE_OLLAMA=true              # Para usar Ollama gratuito
+
+# YouTube (opcional)
+YOUTUBE_CLIENT_ID=tu_client_id
+YOUTUBE_CLIENT_SECRET=tu_secret
+
+# Optimización Shorts
+TARGET_DURATION=45
+
+# Web Interface (opcional)
+WEB_HOST=0.0.0.0            # Para acceso remoto
+WEB_PORT=5000               # Puerto personalizado
+```
 
 # YouTube (opcional)
 YOUTUBE_CLIENT_ID=tu_client_id
@@ -306,10 +431,12 @@ TARGET_DURATION=45
 
 ### ✅ Incluido
 - ✅ Contenido 100% original generado por IA
+- ✅ Interfaz web moderna y responsive
 - ✅ Optimización para algoritmo de Shorts
 - ✅ SEO automático multiidioma
 - ✅ Cumplimiento términos YouTube
 - ✅ Escalabilidad ilimitada
+- ✅ Gestión visual de biblioteca de videos
 
 ### ⚠️ Requisitos del Sistema
 
@@ -326,13 +453,21 @@ TARGET_DURATION=45
 - Conexión a internet estable
 - Requisitos mínimos de hardware
 
+**Para Interfaz Web:**
+- Navegador moderno (Chrome, Firefox, Safari, Edge)
+- Puerto 5000 disponible (configurable)
+
 ## 🔄 Roadmap
 
 - [x] **v1.0** - Generación básica de Shorts
 - [x] **v1.1** - Optimización para algoritmo
-- [ ] **v1.2** - Analytics integrado  
-- [ ] **v1.3** - A/B testing automático
+- [x] **v1.2** - Interfaz web moderna
+- [x] **v1.3** - Dashboard y gestión visual
+- [ ] **v1.4** - Analytics integrado  
+- [ ] **v1.5** - A/B testing automático
 - [ ] **v2.0** - Integración TikTok/Instagram
+- [ ] **v2.1** - API REST completa
+- [ ] **v2.2** - Plantillas de video personalizables
 
 ## 🤝 Contribuir
 
@@ -350,4 +485,8 @@ MIT License - Ver [LICENSE](LICENSE) para detalles.
 
 ### ⭐ ¿Te resulta útil? ¡Deja una estrella y comparte!
 
-**Desarrollado para creators que quieren escalar su contenido con IA 🚀**
+**🚀 Desarrollado para creators que quieren escalar su contenido con IA**
+
+**📧 Soporte**: [GitHub Issues](https://github.com/ibanfernandez/ai-shorts-factory/issues)
+
+**🌐 Demo**: Ejecuta `python simple_web_app.py` y ve a http://localhost:5000

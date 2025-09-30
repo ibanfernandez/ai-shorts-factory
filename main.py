@@ -42,7 +42,15 @@ class YouTubeAutomation:
             self.language = language or 'es'
             self.theme = theme or 'curiosidades'
         
-        self.content_generator = ContentGenerator(self.language, self.theme)
+        # Determinar si usar Ollama basado en configuración
+        use_ollama = None
+        if settings.USE_OLLAMA in ['true', '1', 'yes']:
+            use_ollama = True
+        elif settings.USE_OLLAMA in ['false', '0', 'no']:
+            use_ollama = False
+        # Si es 'auto' o cualquier otro valor, se auto-detecta
+        
+        self.content_generator = ContentGenerator(self.language, self.theme, use_ollama=use_ollama)
         self.video_creator = VideoCreator()
         self.youtube_publisher = YouTubePublisher()
         
@@ -50,7 +58,8 @@ class YouTubeAutomation:
     
     async def create_and_publish_video(self, topic: str, content_type: str = "TOP_5", 
                                      privacy: str = "private", 
-                                     publish_immediately: bool = False) -> dict:
+                                     publish_immediately: bool = False,
+                                     topic_data: dict = None) -> dict:
         """
         Flujo completo: genera contenido, crea video y publica.
         
@@ -83,6 +92,10 @@ class YouTubeAutomation:
                 topic=topic,
                 target_duration=45  # 45 segundos para Shorts
             )
+            
+            # Agregar topic_data para prompts variables
+            if topic_data:
+                request.topic_data = topic_data
             
             generated_content = self.content_generator.generate_content(request)
             result["steps_completed"].append("content_generation")
@@ -285,17 +298,41 @@ async def main():
     
     automation = YouTubeAutomation()
     
-    # Ejemplo: crear un Short individual
-    topic = "datos perturbadores del océano"
+    # 🎯 SISTEMA DE TEMAS ALEATORIOS - MEGA DATABASE
+    from config.topics_database import get_random_topic_and_prompt, get_category_stats, get_topic_by_category
+    
+    # 📊 Mostrar estadísticas de la base de datos
+    stats = get_category_stats()
+    print(f"\n🎲 BASE DE DATOS DE TEMAS TOP 5:")
+    print(f"   📂 {stats['categories']} categorías")
+    print(f"   🎯 {stats['topics']} temas únicos") 
+    print(f"   🎨 {stats['total_combinations']:,} combinaciones posibles")
+    print(f"   ♾️  Variabilidad infinita garantizada!\n")
+    
+    # 🎰 SELECCIÓN AUTOMÁTICA DE TEMA ALEATORIO
+    topic_data = get_random_topic_and_prompt()
+    
+    print(f"🎲 TEMA SELECCIONADO ALEATORIAMENTE:")
+    print(f"   📂 Categoría: {topic_data['category']}")
+    print(f"   🎯 Tema: {topic_data['full_topic']}")
+    print(f"   🪝 Hook: {topic_data['hook'][:50]}...")
+    print(f"   🎬 Prompt único generado: ✅")
+    
+    topic = topic_data['full_topic']
+    
+    # 💡 OPCIONAL: Para forzar una categoría específica descomenta:
+    # topic_data = get_topic_by_category("conspiracies_mysteries")  # Cambiar categoría
+    # topic = topic_data['full_topic'] if topic_data else topic
     
     logger.info(f"Iniciando automatización para: {topic}")
     
     try:
         result = await automation.create_and_publish_video(
             topic=topic,
-            content_type="CURIOSIDADES",  # Mejor para Shorts
+            content_type="TOP_5",  # Cambiar a TOP_5 para usar la nueva base de datos
             privacy="private",
-            publish_immediately=False  # Cambiar a True para publicar
+            publish_immediately=False,  # Cambiar a True para publicar
+            topic_data=topic_data  # Pasar los datos del tema para prompts variables
         )
         
         print("\n" + "="*60)
@@ -351,10 +388,14 @@ def show_config_info():
         print(f"🎬 Tema: {settings.THEME}")
 
 if __name__ == "__main__":
-    # Verificar configuración básica
-    if not settings.OPENAI_API_KEY:
-        print("❌ Error: OPENAI_API_KEY no configurada")
-        print("📝 Copia .env.example a .env y configura tus APIs")
+    # Verificar configuración básica de IA
+    use_ollama_setting = settings.USE_OLLAMA.lower() in ['true', '1', 'yes']
+    
+    if not use_ollama_setting and not settings.OPENAI_API_KEY:
+        print("❌ Error: No hay configuración de IA")
+        print("📝 Opciones:")
+        print("   1. Para Ollama GRATUITO: USE_OLLAMA=true en .env")
+        print("   2. Para OpenAI (pago): OPENAI_API_KEY=tu-clave en .env")
         sys.exit(1)
     
     print("🚀 YouTube Shorts IA Automate")

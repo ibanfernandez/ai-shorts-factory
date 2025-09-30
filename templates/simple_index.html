@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Shorts Factory - Generador Automático</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #00d4aa;
+            --danger-color: #ff6b6b;
+            --warning-color: #feca57;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container-fluid {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 15px;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #00a085);
+            border: none;
+            border-radius: 15px;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color), #ff5252);
+            border: none;
+            border-radius: 15px;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--success-color), #00a085);
+            border-radius: 10px;
+        }
+        
+        .form-select, .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus, .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .video-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .topic-pill {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 25px;
+            padding: 8px 16px;
+            margin: 3px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+        }
+        
+        .topic-pill:hover {
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .spinner-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .custom-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(102, 126, 234, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .alert-custom {
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-tabs .nav-link {
+            border-radius: 15px 15px 0 0;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            margin-right: 5px;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .tab-content {
+            background: white;
+            border-radius: 0 15px 15px 15px;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container-fluid {
+                padding: 1rem;
+            }
+            
+            .card-header {
+                padding: 1rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .video-thumbnail {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1 class="mb-0">
+                            <i class="fas fa-video"></i>
+                            AI Shorts Factory
+                        </h1>
+                        <p class="mb-0 mt-2 opacity-75">Generador Automático de Videos para YouTube Shorts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Dashboard -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="totalVideos">0</div>
+                    <div class="text-muted">Videos Generados</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="activeGenerations">0</div>
+                    <div class="text-muted">Generaciones Activas</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="availableTopics">0</div>
+                    <div class="text-muted">Temas Disponibles</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="generator-tab" data-bs-toggle="tab" data-bs-target="#generator" type="button" role="tab">
+                                <i class="fas fa-magic"></i> Generar Video
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="library-tab" data-bs-toggle="tab" data-bs-target="#library" type="button" role="tab">
+                                <i class="fas fa-film"></i> Biblioteca de Videos
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="topics-tab" data-bs-toggle="tab" data-bs-target="#topics" type="button" role="tab">
+                                <i class="fas fa-tags"></i> Temas y Categorías
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="mainTabsContent">
+                        <!-- Generator Tab -->
+                        <div class="tab-pane fade show active" id="generator" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-8 mx-auto">
+                                    <form id="generatorForm">
+                                        <div class="mb-4">
+                                            <label for="contentType" class="form-label fs-5">
+                                                <i class="fas fa-list"></i> Tipo de Contenido
+                                            </label>
+                                            <select class="form-select" id="contentType" required>
+                                                <option value="TOP_5">TOP 5 - Videos Virales</option>
+                                                <option value="CURIOSIDADES">Curiosidades y Datos</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <label for="topicInput" class="form-label fs-5">
+                                                <i class="fas fa-lightbulb"></i> Tema del Video
+                                            </label>
+                                            <input type="text" class="form-control" id="topicInput" 
+                                                   placeholder="Ej: animales más raros del planeta" required>
+                                            <div class="form-text">
+                                                Describe el tema específico que quieres que cubra el video
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg" id="generateBtn">
+                                                <i class="fas fa-rocket"></i>
+                                                Generar Video Automáticamente
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- Progress Section -->
+                            <div id="progressSection" style="display: none;">
+                                <hr class="my-4">
+                                <div class="row">
+                                    <div class="col-lg-8 mx-auto">
+                                        <div class="spinner-container">
+                                            <div class="custom-spinner"></div>
+                                            <h4 class="mt-3" id="progressText">Iniciando generación...</h4>
+                                            <div class="progress w-100 mt-3" style="height: 10px;">
+                                                <div class="progress-bar" id="progressBar" role="progressbar" 
+                                                     style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <span id="progressPercent">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Library Tab -->
+                        <div class="tab-pane fade" id="library" role="tabpanel">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3><i class="fas fa-film"></i> Biblioteca de Videos</h3>
+                                <button class="btn btn-success" onclick="refreshLibrary()">
+                                    <i class="fas fa-refresh"></i> Actualizar
+                                </button>
+                            </div>
+                            
+                            <div id="videoGrid" class="row">
+                                <!-- Videos se cargan dinámicamente -->
+                            </div>
+                            
+                            <div id="emptyLibrary" style="display: none;" class="text-center py-5">
+                                <i class="fas fa-video fa-3x text-muted mb-3"></i>
+                                <h4 class="text-muted">No hay videos generados aún</h4>
+                                <p class="text-muted">Usa la pestaña "Generar Video" para crear tu primer Short automático</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Topics Tab -->
+                        <div class="tab-pane fade" id="topics" role="tabpanel">
+                            <h3 class="mb-4"><i class="fas fa-tags"></i> Temas y Categorías</h3>
+                            <div id="topicsContainer">
+                                <!-- Topics se cargan dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Video Player Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalTitle">Reproducir Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <video id="modalVideo" controls style="width: 100%; max-height: 70vh; border-radius: 10px;">
+                        Tu navegador no soporta el elemento video.
+                    </video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" id="deleteVideoBtn">
+                        <i class="fas fa-trash"></i> Eliminar Video
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentSessionId = null;
+        let progressInterval = null;
+        let currentVideoId = null;
+        
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTopics();
+            loadVideoLibrary();
+            loadStats();
+            
+            // Actualizar stats cada 30 segundos
+            setInterval(loadStats, 30000);
+        });
+        
+        // Form submission
+        document.getElementById('generatorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const topic = document.getElementById('topicInput').value.trim();
+            const contentType = document.getElementById('contentType').value;
+            
+            if (!topic) {
+                alert('Por favor, ingresa un tema para el video');
+                return;
+            }
+            
+            startGeneration(topic, contentType);
+        });
+        
+        async function startGeneration(topic, contentType) {
+            currentSessionId = `session_${Date.now()}`;
+            
+            // Mostrar sección de progreso
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('generateBtn').disabled = true;
+            
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        topic: topic,
+                        content_type: contentType,
+                        session_id: currentSessionId
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                // Iniciar polling del progreso
+                startProgressPolling(currentSessionId);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al iniciar la generación: ' + error.message);
+                resetGenerator();
+            }
+        }
+        
+        function startProgressPolling(sessionId) {
+            progressInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/progress/${sessionId}`);
+                    const progress = await response.json();
+                    
+                    updateProgress(progress);
+                    
+                    if (progress.status === 'completed' || progress.status === 'error') {
+                        clearInterval(progressInterval);
+                        
+                        if (progress.status === 'completed') {
+                            setTimeout(() => {
+                                resetGenerator();
+                                loadVideoLibrary();
+                                loadStats();
+                                alert('¡Video generado exitosamente! Revisa la biblioteca de videos.');
+                            }, 2000);
+                        } else {
+                            alert('Error en la generación: ' + progress.error);
+                            resetGenerator();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking progress:', error);
+                }
+            }, 2000); // Check every 2 seconds
+        }
+        
+        function updateProgress(progress) {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const progressPercent = document.getElementById('progressPercent');
+            
+            progressBar.style.width = progress.progress + '%';
+            progressBar.setAttribute('aria-valuenow', progress.progress);
+            progressText.textContent = progress.step || 'Procesando...';
+            progressPercent.textContent = Math.round(progress.progress) + '%';
+        }
+        
+        function resetGenerator() {
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generatorForm').reset();
+            
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+        }
+        
+        async function loadTopics() {
+            try {
+                const response = await fetch('/api/topics');
+                const topics = await response.json();
+                
+                const container = document.getElementById('topicsContainer');
+                container.innerHTML = '';
+                
+                for (const [category, items] of Object.entries(topics)) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'mb-4';
+                    
+                    if (category === 'TOP_5') {
+                        categoryDiv.innerHTML = `<h4 class="mb-3"><i class="fas fa-list-ol"></i> ${category}</h4>`;
+                        
+                        for (const [subcat, subtopics] of Object.entries(items)) {
+                            categoryDiv.innerHTML += `
+                                <h5 class="mt-4 mb-2"><i class="fas fa-folder"></i> ${subcat}</h5>
+                                <div class="mb-3">
+                                    ${subtopics.map(topic => 
+                                        `<span class="topic-pill" onclick="selectTopic('${topic}')">${topic}</span>`
+                                    ).join('')}
+                                </div>
+                            `;
+                        }
+                    } else {
+                        categoryDiv.innerHTML = `
+                            <h4 class="mb-3"><i class="fas fa-question-circle"></i> ${category}</h4>
+                            <div class="mb-3">
+                                ${items.map(topic => 
+                                    `<span class="topic-pill" onclick="selectTopic('${topic}')">${topic}</span>`
+                                ).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    container.appendChild(categoryDiv);
+                }
+            } catch (error) {
+                console.error('Error loading topics:', error);
+            }
+        }
+        
+        function selectTopic(topic) {
+            // Cambiar a la pestaña del generador
+            document.getElementById('generator-tab').click();
+            
+            // Rellenar el formulario
+            document.getElementById('topicInput').value = topic;
+            
+            // Determinar el tipo de contenido
+            if (topic.includes('más') || topic.includes('top') || topic.includes('mejores')) {
+                document.getElementById('contentType').value = 'TOP_5';
+            } else {
+                document.getElementById('contentType').value = 'CURIOSIDADES';
+            }
+        }
+        
+        async function loadVideoLibrary() {
+            try {
+                const response = await fetch('/api/library');
+                const videos = await response.json();
+                
+                const grid = document.getElementById('videoGrid');
+                const empty = document.getElementById('emptyLibrary');
+                
+                if (videos.length === 0) {
+                    grid.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+                
+                empty.style.display = 'none';
+                grid.innerHTML = '';
+                
+                videos.forEach(video => {
+                    const videoCard = document.createElement('div');
+                    videoCard.className = 'col-lg-4 col-md-6 mb-4';
+                    
+                    const thumbnailSrc = video.thumbnail_path ? 
+                        `/api/thumbnail/${video.id}` : 
+                        '';
+                    
+                    const statusColor = {
+                        'completed': 'success',
+                        'processing': 'warning',
+                        'error': 'danger'
+                    }[video.status] || 'secondary';
+                    
+                    videoCard.innerHTML = `
+                        <div class="card video-card h-100" onclick="playVideo(${video.id})">
+                            <div class="position-relative">
+                                ${thumbnailSrc ? 
+                                    `<img src="${thumbnailSrc}" class="video-thumbnail" alt="Thumbnail">` :
+                                    `<div class="video-thumbnail"><i class="fas fa-video"></i></div>`
+                                }
+                                <span class="status-badge badge bg-${statusColor}">
+                                    ${video.status === 'completed' ? 'Completado' : video.status}
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">${video.title}</h6>
+                                <p class="card-text text-muted small mb-2">
+                                    <i class="fas fa-tag"></i> ${video.content_type}
+                                </p>
+                                <p class="card-text text-muted small">
+                                    <i class="fas fa-clock"></i> ${formatDate(video.created_at)}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(videoCard);
+                });
+                
+            } catch (error) {
+                console.error('Error loading video library:', error);
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/status');
+                const stats = await response.json();
+                
+                document.getElementById('totalVideos').textContent = stats.total_videos;
+                document.getElementById('activeGenerations').textContent = stats.active_generations;
+                document.getElementById('availableTopics').textContent = stats.available_topics;
+                
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
+        function refreshLibrary() {
+            loadVideoLibrary();
+            loadStats();
+        }
+        
+        function playVideo(videoId) {
+            currentVideoId = videoId;
+            const videoElement = document.getElementById('modalVideo');
+            videoElement.src = `/api/video/${videoId}`;
+            
+            const modal = new bootstrap.Modal(document.getElementById('videoModal'));
+            modal.show();
+        }
+        
+        // Delete video handler
+        document.getElementById('deleteVideoBtn').addEventListener('click', async function() {
+            if (!currentVideoId) return;
+            
+            if (confirm('¿Estás seguro de que quieres eliminar este video?')) {
+                try {
+                    const response = await fetch(`/api/delete/${currentVideoId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('videoModal'));
+                        modal.hide();
+                        
+                        loadVideoLibrary();
+                        loadStats();
+                        alert('Video eliminado exitosamente');
+                    } else {
+                        throw new Error('Error al eliminar el video');
+                    }
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            }
+        });
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Clean up video when modal closes
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('modalVideo').src = '';
+            currentVideoId = null;
+        });
+    </script>
+</body>
+</html>

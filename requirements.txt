@@ -15,7 +15,6 @@ google-auth-httplib2>=0.1.0
 google-api-python-client>=2.70.0
 
 # Base de datos
-sqlite3
 sqlalchemy>=2.0.0
 
 # Scraping y análisis
@@ -29,12 +28,11 @@ numpy>=1.24.0
 matplotlib>=3.7.0
 
 # APIs de terceros
-unsplash-python>=1.0.0
-elevenlabs>=0.2.0
+python-unsplash>=1.0.0
+elevenlabs>=1.0.0
 
 # Utilidades
 schedule>=1.2.0
-python-crontab>=2.7.0
 rich>=13.0.0
 typer>=0.9.0
 pydantic>=2.0.0
