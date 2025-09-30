@@ -5,7 +5,7 @@
 ### **Acceso Rápido a la Interfaz Web**
 
 ```bash
-# 1. Instalar dependencias completas (REQUERIDAS)
+# 1. Instalar dependencias (único archivo de requirements)
 pip install -r requirements.txt
 
 # 2. Lanzar interfaz web
@@ -14,7 +14,7 @@ python simple_web_app.py
 # 3. Abrir navegador en: http://localhost:5000
 ```
 
-> **⚠️ IMPORTANTE**: La interfaz web necesita **TODAS** las dependencias principales porque utiliza los mismos módulos de IA, video y audio que el sistema CLI.
+> **⚠️ IMPORTANTE**: La interfaz web utiliza los mismos módulos de IA, video y audio que el sistema CLI.
 
 ### **🎮 Funciones de la Interfaz Web**
 
@@ -193,9 +193,9 @@ python main.py
 
 | Error | Solución |
 |-------|----------|
-| `No module named 'flask'` | `pip install -r requirements.txt` (NO simple_requirements.txt) |
+| `No module named 'flask'` | `pip install -r requirements.txt` |
 | `No module named 'openai'` | `pip install -r requirements.txt` |
-| `No module named 'moviepy'` | `pip install -r requirements.txt` - La web necesita TODAS las deps |
+| `No module named 'moviepy'` | `pip install -r requirements.txt` - Todas las deps en un archivo |
 | `sqlite3 not found` | ✅ Solucionado (módulo built-in de Python) |
 | `unknown command "generate"` | ✅ Solucionado - Ollama ahora usa `run` |
 | `UnicodeEncodeError` | Normal en Windows - el sistema funciona |
@@ -203,7 +203,7 @@ python main.py
 | `Ollama connection failed` | Ejecutar `ollama serve` en terminal separada |
 | `Python not found` | Instalar Python 3.9+ desde python.org |
 | Emojis no se ven | Normal en Windows PowerShell - funciona bien |
-| Error al abrir web | Verificar que TODAS las dependencias estén instaladas |
+| Error al abrir web | Verificar que todas las dependencias estén instaladas |
 
 **Idiomas disponibles:**
 - 🇪🇸 `es` - Español (Voz: Alvaro/Elvira)
@@ -233,6 +233,55 @@ python main.py
 - 💰 `negocios` - Emprendimiento y finanzas
 - 🎵 `musica` - Artistas, géneros y datos musicales
 - 🔬 `ciencia` - Descubrimientos y experimentos
+
+## 🎯 **Cómo Añadir Nuevos Temas**
+
+El sistema incluye una **mega base de datos** con **500+ temas** organizados en categorías. Para añadir tus propios temas:
+
+### **Método 1: Interfaz Web (Recomendado)**
+1. 🌐 **Abrir interfaz web**: `python simple_web_app.py`
+2. 📝 **Ir a "Generador de Videos"**
+3. ✍️ **Escribir tema personalizado** en el campo "Tema del Video"
+4. 🚀 **Generar automáticamente**
+
+### **Método 2: Modificar Base de Datos**
+```python
+# Editar: config/topics_database.py
+
+TOPICS_DATABASE = {
+    "mi_nueva_categoria": [
+        "tema personalizado 1",
+        "tema personalizado 2", 
+        "tema personalizado 3",
+        # ... agregar más temas
+    ],
+    
+    # Categorías existentes:
+    "conspiracies_mysteries": [...],
+    "space_universe": [...],
+    "technology_future": [...],
+    # ... 15+ categorías más con 500+ temas
+}
+```
+
+### **Método 3: Variables de Entorno**
+```env
+# Archivo .env
+CONTENT_THEME=mi_tema_personalizado
+```
+
+### **💡 Ejemplos de Temas Virales:**
+- 🔥 **"secretos que las aerolíneas no quieren que sepas"**
+- 🌟 **"datos perturbadores sobre el océano profundo"**  
+- 🚀 **"tecnologías del futuro que ya existen"**
+- 👻 **"lugares abandonados más escalofriantes"**
+- 🧠 **"experimentos psicológicos más perturbadores"**
+
+### **📊 Base de Datos Incluida:**
+- **500+ temas** predefinidos y probados
+- **15+ categorías** virales organizadas
+- **Frases optimizadas** para algoritmo de YouTube Shorts
+- **Contenido en español** especializado para audiencia hispana
 
 
 
@@ -310,10 +359,8 @@ ai-shorts-factory/
 
 ### **Básico Web - Interfaz Gráfica**
 ```bash
-# IMPORTANTE: Instalar TODAS las dependencias primero
+# Instalar dependencias y lanzar interfaz web
 pip install -r requirements.txt
-
-# Luego lanzar la interfaz web
 python simple_web_app.py
 # Abrir http://localhost:5000 y usar la interfaz
 ```
